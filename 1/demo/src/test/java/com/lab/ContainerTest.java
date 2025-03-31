@@ -5,8 +5,23 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+/**
+ * Набор тестов для проверки функциональности класса Container.
+ * Тесты покрывают все основные операции работы с контейнером:
+ * - Добавление и получение элементов
+ * - Автоматическое расширение при заполнении
+ * - Удаление элементов
+ * - Очистка контейнера
+ * - Проверка наличия элементов
+ * - Обработка ошибочных ситуаций
+ */
 public class ContainerTest {
     
+    /**
+     * Проверяет корректность добавления и последующего получения элементов.
+     * Тест последовательно добавляет три элемента и проверяет,
+     * что они сохраняются в правильном порядке.
+     */
     @Test
     public void shouldAddAndRetrieveElements() {
         Container c = new Container();
@@ -19,6 +34,11 @@ public class ContainerTest {
         assertEquals(30, c.get(2));
     }
 
+    /**
+     * Проверяет автоматическое расширение контейнера при заполнении.
+     * Добавляет больше элементов, чем начальная емкость контейнера,
+     * и проверяет что все элементы были успешно добавлены.
+     */
     @Test
     public void shouldExpandWhenFull() {
         Container c = new Container();
@@ -29,6 +49,11 @@ public class ContainerTest {
         assertEquals(15, c.size());
     }
 
+    /**
+     * Проверяет корректность отслеживания размера контейнера.
+     * Проверяет что новый контейнер имеет размер 0 и что после добавления
+     * элементов размер увеличивается.
+     */
     @Test
     public void shouldTrackSize() {
         Container c = new Container();
@@ -40,6 +65,11 @@ public class ContainerTest {
         assertEquals(2, c.size());
     }
 
+    /**
+     * Проверяет корректность удаления элементов.
+     * Проверяет что метод remove возвращает правильное значение
+     * и размер контейнера уменьшается после удаления.
+     */
     @Test
     public void shouldRemoveElements() {
         Container c = new Container();
@@ -51,6 +81,11 @@ public class ContainerTest {
         assertEquals(2, c.size());
     }
 
+    /**
+     * Проверяет полную очистку контейнера.
+     * Проверяет что после вызова clear размер становится равным 0
+     * и контейнер возвращается в исходное состояние.
+     */
     @Test
     public void shouldClearAllElements() {
         Container c = new Container();
@@ -62,6 +97,11 @@ public class ContainerTest {
         assertEquals(0, c.size());
     }
 
+    /**
+     * Проверяет корректность проверки наличия элемента.
+     * Проверяет что для существующих элементов возвращается true,
+     * а для отсутствующих - false.
+     */
     @Test
     public void shouldCheckElementPresence() {
         Container c = new Container();
@@ -72,12 +112,22 @@ public class ContainerTest {
         assertFalse(c.contains(9));
     }
 
+    /**
+     * Проверяет обработку попытки удаления из пустого контейнера.
+     * Ожидается выброс IndexOutOfBoundsException при попытке
+     * удаления элемента из пустого контейнера.
+     */
     @Test(expected = IndexOutOfBoundsException.class)
     public void shouldFailWhenRemovingFromEmpty() {
         Container c = new Container();
         c.remove(0);
     }
 
+    /**
+     * Проверяет обработку попытки доступа к пустому контейнеру.
+     * Ожидается выброс IndexOutOfBoundsException при попытке
+     * получения элемента из пустого контейнера.
+     */
     @Test(expected = IndexOutOfBoundsException.class)
     public void shouldFailWhenAccessingEmpty() {
         Container c = new Container();
