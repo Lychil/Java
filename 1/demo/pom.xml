@@ -29,27 +29,6 @@
 
     <build>
         <plugins>
-            <!-- Плагин для генерации Javadoc -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.5.0</version> <!-- Проверьте актуальную версию на момент использования -->
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>javadoc</goal> <!-- Цель для генерации Javadoc -->
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <show>public</show> <!-- Показывать только публичные элементы -->
-                    <encoding>UTF-8</encoding> <!-- Кодировка исходных файлов -->
-                    <docencoding>UTF-8</docencoding> <!-- Кодировка документации -->
-                    <charset>UTF-8</charset> <!-- Кодировка для браузера -->
-                    <windowtitle>Container API</windowtitle> <!-- Заголовок окна -->
-                    <doctitle>Container API Documentation</doctitle> <!-- Заголовок документации -->
-                </configuration>
-            </plugin>
 
             <!-- Плагин для создания исполняемого JAR (shade plugin) -->
             <plugin>
