@@ -1,51 +1,44 @@
 package com.lab;
 
-public class Container {
+import java.util.Objects;
+
+public final class Container {
     private int[] data;
-    private int count;
-    
-    private static final int DEFAULT_SIZE = 10;
+    private int size;
+    private static final int INITIAL_CAPACITY = 10;
+    private static final int MAX_CAPACITY = Integer.MAX_VALUE - 8;
 
     public Container() {
-        data = new int[DEFAULT_SIZE];
-        count = 0;
+        data = new int[INITIAL_CAPACITY];
     }
 
-    private void validateIndex(int index) {
-        if (index < 0 || index >= count) {
-            throw new IndexOutOfBoundsException("Invalid index");
-        }
-    }
-
-    public int get(int index) {
-        validateIndex(index);
-        return data[index];
+    public Container(int capacity) {
+        if (capacity < 0) throw new IllegalArgumentException("Отрицательная емкость недопустима");
+        data = new int[Math.min(capacity, MAX_CAPACITY)];
     }
 
     public void add(int value) {
-        if (count == data.length) {
-            int[] newData = new int[data.length * 2];
-            System.arraycopy(data, 0, newData, 0, count);
-            data = newData;
+        if (size == data.length) {
+            resize();
         }
-        data[count++] = value;
+        data[size++] = value;
+    }
+
+    public int get(int index) {
+        Objects.checkIndex(index, size);
+        return data[index];
     }
 
     public int remove(int index) {
-        validateIndex(index);
-        int removed = data[index];
-        System.arraycopy(data, index + 1, data, index, count - index - 1);
-        count--;
-        return removed;
-    }
-
-    public void clear() {
-        data = new int[DEFAULT_SIZE];
-        count = 0;
+        Objects.checkIndex(index, size);
+        int value = data[index];
+        System.arraycopy(data, index + 1, data, index, size - index - 1);
+        size--;
+        return value;
     }
 
     public boolean contains(int value) {
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < size; i++) {
             if (data[i] == value) {
                 return true;
             }
@@ -53,7 +46,23 @@ public class Container {
         return false;
     }
 
+    public void clear() {
+        data = new int[INITIAL_CAPACITY];
+        size = 0;
+    }
+
     public int size() {
-        return count;
+        return size;
+    }
+
+    private void resize() {
+        if (data.length == MAX_CAPACITY) {
+            throw new OutOfMemoryError("Достигнута максимальная емкость контейнера");
+        }
+        int newCapacity = data.length + (data.length >> 1);
+        newCapacity = Math.min(newCapacity, MAX_CAPACITY);
+        int[] newData = new int[newCapacity];
+        System.arraycopy(data, 0, newData, 0, size);
+        data = newData;
     }
 }
