@@ -16,7 +16,16 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
+/**
+ * Основной класс программы для парсинга и обработки CSV файла с данными сотрудников.
+ */
 public class Main {
+
+    /**
+     * Точка входа в программу, которая загружает CSV файл и выводит данные сотрудников.
+     *
+     * @param args аргументы командной строки.
+     */
     public static void main(String[] args) {
         String csvPath = "foreign_names.csv";
         char delimiter = ';';
@@ -26,6 +35,13 @@ public class Main {
         employees.forEach(System.out::println);
     }
 
+    /**
+     * Парсит данные сотрудников из CSV файла.
+     *
+     * @param fileName имя файла CSV.
+     * @param delimiter разделитель в CSV файле.
+     * @return список объектов сотрудников.
+     */
     public static List<Employee> parseEmployeesFromCSV(String fileName, char delimiter) {
         List<Employee> result = new ArrayList<>();
         Map<String, Division> divisions = new HashMap<>();
