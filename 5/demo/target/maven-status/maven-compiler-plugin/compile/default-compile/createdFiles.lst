@@ -1,0 +1,9 @@
+com\example\sm\implementations\OtherImpl.class
+com\example\annotations\AutoInjectable.class
+com\example\sm\implementations\SODoer.class
+com\example\App.class
+com\example\sm\interfaces\SomeOtherInterface.class
+com\example\sm\SomeBean.class
+com\example\core\Injector.class
+com\example\sm\interfaces\SomeInterface.class
+com\example\sm\implementations\SomeImpl.class
